@@ -1,11 +1,15 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # license removed for brevity
 import rospy
 from geometry_msgs.msg import Twist
 import sys
 from getkey import getkey, keys
 from std_srvs.srv import Empty
-from playback.py import playback
+import os
+#print(os.listdir('/home/p2-bremner/catkin_ws/src/turtle_control/src/my_package'))
+#sys.path.append('/home/p2-bremner/catkin_ws/src/turtle_control/src/my_package')
+#print(sys.path)
+import my_package.Playback
 
 
 
@@ -19,6 +23,7 @@ def turtle_talker():#lv,av):
     rec_mode = True
     instructions = []
     reset = rospy.ServiceProxy('reset', Empty)
+
     while not rospy.is_shutdown():
 
         #lv, av = map(float, raw_input('enter velocity values: ').split())
@@ -52,7 +57,7 @@ def turtle_talker():#lv,av):
                 instructions.append({'lv':lv, 'av':av})
 
         else:
-            lv, av, rec_mode = playback(instructions, rec_mode, play_mode)
+            lv, av, rec_mode = my_package.Playback.playback(instructions, rec_mode, play_mode)
 
 
         msg.angular.z = float(av)
