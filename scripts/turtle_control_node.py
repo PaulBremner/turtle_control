@@ -6,10 +6,7 @@ import sys
 from getkey import getkey, keys
 from std_srvs.srv import Empty
 import os
-#print(os.listdir('/home/p2-bremner/catkin_ws/src/turtle_control/src/my_package'))
-#sys.path.append('/home/p2-bremner/catkin_ws/src/turtle_control/src/my_package')
-#print(sys.path)
-import my_package.Playback
+import data_package.datarecording
 
 
 
@@ -57,7 +54,7 @@ def turtle_talker():#lv,av):
                 instructions.append({'lv':lv, 'av':av})
 
         else:
-            lv, av, rec_mode = my_package.Playback.playback(instructions, rec_mode, play_mode)
+            lv, av, rec_mode = data_package.datarecording.playback(instructions, rec_mode, play_mode)
 
 
         msg.angular.z = float(av)
