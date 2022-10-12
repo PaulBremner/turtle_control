@@ -6,7 +6,7 @@ import sys
 from getkey import getkey, keys
 from std_srvs.srv import Empty
 import os
-import data_package.datarecording
+from data_package.datarecording import playback
 
 
 
@@ -23,7 +23,9 @@ def turtle_talker():#lv,av):
 
     while not rospy.is_shutdown():
 
-        #lv, av = map(float, raw_input('enter velocity values: ').split())
+        #lv, av = map(float, input('enter velocity values: ').split())
+        #lv = float(lv)
+        #av = float(av)
 
         if rec_mode:
             key = getkey()
@@ -54,7 +56,7 @@ def turtle_talker():#lv,av):
                 instructions.append({'lv':lv, 'av':av})
 
         else:
-            lv, av, rec_mode = data_package.datarecording.playback(instructions, rec_mode, play_mode)
+            lv, av, rec_mode = playback(instructions, rec_mode, play_mode)
 
 
         msg.angular.z = float(av)
