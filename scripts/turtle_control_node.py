@@ -20,6 +20,7 @@ def turtle_talker():#lv,av):
     rec_mode = True
     instructions = []
     reset = rospy.ServiceProxy('reset', Empty)
+    print("press p to replay, b to reverse the path, r to reset")
 
     while not rospy.is_shutdown():
 
